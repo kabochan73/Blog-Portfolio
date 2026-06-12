@@ -26,7 +26,7 @@ export function ArticleCard({
         <div className="flex items-center gap-3 flex-wrap">
           <p className="text-sm text-gray-500">
             {article[dateField]
-              ? new Date(article[dateField]!).toLocaleDateString('ja-JP')
+              ? new Date(article[dateField]).toLocaleDateString('ja-JP')
               : '—'}
           </p>
           {article.tags.map((tag) => (

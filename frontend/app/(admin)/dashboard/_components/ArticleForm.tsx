@@ -1,6 +1,7 @@
 'use client'
 
 import { useActionState, useState } from 'react'
+import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -128,12 +129,12 @@ export function ArticleForm({ tags, article }: Props) {
           >
             {isPending ? '保存中...' : '保存'}
           </button>
-          <a
+          <Link
             href="/dashboard/articles"
             className="text-sm px-6 py-2 rounded-md border border-gray-300 hover:bg-gray-50"
           >
             キャンセル
-          </a>
+          </Link>
         </div>
       </div>
     </form>

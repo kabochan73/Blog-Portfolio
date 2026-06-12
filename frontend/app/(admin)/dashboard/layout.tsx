@@ -15,7 +15,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-          <span className="text-xl font-bold text-gray-900">管理画面</span>
+          <Link href="/dashboard/articles" className="text-xl font-bold text-gray-900 hover:text-gray-600">管理画面</Link>
           <nav className="flex items-center gap-6">
             <Link href="/dashboard/articles" className="text-sm text-gray-600 hover:text-gray-900">
               記事管理
