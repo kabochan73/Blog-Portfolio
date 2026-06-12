@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { api } from '@/lib/api'
 import type { ApiResponse, Article, Tag } from '@/types'
-import { AdminArticleList } from './AdminArticleList'
+import { AdminArticleList } from '../_components/AdminArticleList'
 
 export default async function AdminArticlesPage() {
   const cookieStore = await cookies()
