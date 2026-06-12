@@ -4,7 +4,7 @@ import { useState } from 'react'
 import type { Article, Tag } from '@/types'
 import { ArticleCard } from '@/app/_components/ArticleCard'
 import { FilterSidebar } from '@/app/_components/FilterSidebar'
-import { deleteArticle } from './actions'
+import { deleteArticle } from '../articles/actions'
 
 type Props = {
   articles: Article[]

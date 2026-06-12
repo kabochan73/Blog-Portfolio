@@ -4,7 +4,7 @@ import { useActionState, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
-import { createArticle, updateArticle, type ArticleActionState } from './actions'
+import { createArticle, updateArticle, type ArticleActionState } from '../articles/actions'
 import type { Article, Tag } from '@/types'
 
 type Props = {
