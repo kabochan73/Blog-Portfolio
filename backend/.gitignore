@@ -1,4 +1,5 @@
 *.log
+*.pid
 /database/database.sqlite
 .DS_Store
 .env
