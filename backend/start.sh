@@ -9,7 +9,12 @@ if [ ! -d "vendor" ]; then
     composer install --no-interaction --optimize-autoloader
 fi
 
-php artisan migrate --force
+echo "Waiting for database..."
+for i in $(seq 1 30); do
+    php artisan migrate --force && break
+    echo "Retrying in 3s... ($i/30)"
+    sleep 3
+done
 php artisan config:cache
 php artisan route:cache
 
