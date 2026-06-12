@@ -1,7 +1,6 @@
 'use client'
 
 import type { Tag } from '@/types'
-import { Input } from '@/app/_components/ui/Input'
 
 type Props = {
   query: string
@@ -10,6 +9,15 @@ type Props = {
   placeholder?: string
   onQueryChange: (value: string) => void
   onTagClick: (tagId: number) => void
+}
+
+function Input({ className = '', ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <input
+      className={`border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 bg-white ${className}`}
+      {...props}
+    />
+  )
 }
 
 function TagFilterButton({
