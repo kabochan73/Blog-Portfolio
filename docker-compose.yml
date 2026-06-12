@@ -1,0 +1,49 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./backend:/var/www/html
+      - /var/www/html/vendor
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: blog_portfolio
+      POSTGRES_USER: blog_user
+      POSTGRES_PASSWORD: blog_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./frontend
+      target: dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080/api
+      - API_URL=http://backend/api
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
