@@ -52,7 +52,7 @@ export function FilterSidebar({
   onTagClick,
 }: Props) {
   return (
-    <aside className="flex-1 shrink-0 sticky top-8 self-start">
+    <aside className="w-full">
       <Input
         type="search"
         value={query}

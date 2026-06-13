@@ -29,12 +29,14 @@ export function SearchSidebar({ tags }: Props) {
   }
 
   return (
-    <FilterSidebar
-      query={query}
-      selectedTag={selectedTag}
-      tags={tags}
-      onQueryChange={(q) => updateParams({ q })}
-      onTagClick={(tagId) => updateParams({ tag: selectedTag === tagId ? null : String(tagId) })}
-    />
+    <div className="md:w-56 md:shrink-0 md:sticky md:top-8 md:self-start">
+      <FilterSidebar
+        query={query}
+        selectedTag={selectedTag}
+        tags={tags}
+        onQueryChange={(q) => updateParams({ q })}
+        onTagClick={(tagId) => updateParams({ tag: selectedTag === tagId ? null : String(tagId) })}
+      />
+    </div>
   )
 }

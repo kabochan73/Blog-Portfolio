@@ -66,14 +66,16 @@ export function AdminArticleList({
           </ul>
         )}
       </main>
-      <FilterSidebar
-        query={query}
-        selectedTag={selectedTag}
-        tags={tags}
-        placeholder={placeholder}
-        onQueryChange={setQuery}
-        onTagClick={handleTagClick}
-      />
+      <div className="flex-1 shrink-0 sticky top-8 self-start">
+        <FilterSidebar
+          query={query}
+          selectedTag={selectedTag}
+          tags={tags}
+          placeholder={placeholder}
+          onQueryChange={setQuery}
+          onTagClick={handleTagClick}
+        />
+      </div>
     </div>
   )
 }

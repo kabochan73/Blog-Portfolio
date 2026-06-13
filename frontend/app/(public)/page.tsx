@@ -24,11 +24,11 @@ export default async function Home({
   })
 
   return (
-    <div className="flex gap-8">
-      <main className="flex-3 min-w-0">
+    <div className="flex flex-col gap-4 md:flex-row md:gap-8">
+      <SearchSidebar tags={tags} />
+      <main className="min-w-0 md:flex-3 md:order-first">
         <ArticleList articles={filtered} selectedTag={selectedTag} query={q ?? ''} />
       </main>
-      <SearchSidebar tags={tags} />
     </div>
   )
 }
