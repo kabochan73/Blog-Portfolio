@@ -35,8 +35,18 @@ export function AdminArticleList({
   }
 
   return (
-    <div className="flex gap-8">
-      <main className="flex-3 min-w-0">
+    <div className="flex flex-col gap-4 md:flex-row md:gap-8">
+      <div className="md:w-56 md:shrink-0 md:sticky md:top-8 md:self-start">
+        <FilterSidebar
+          query={query}
+          selectedTag={selectedTag}
+          tags={tags}
+          placeholder={placeholder}
+          onQueryChange={setQuery}
+          onTagClick={handleTagClick}
+        />
+      </div>
+      <main className="min-w-0 md:flex-[3] md:order-first">
         {filtered.length === 0 ? (
           <p className="text-gray-500">
             {query || selectedTag ? '条件に一致する記事がありません。' : emptyText}
@@ -66,16 +76,6 @@ export function AdminArticleList({
           </ul>
         )}
       </main>
-      <div className="flex-1 shrink-0 sticky top-8 self-start">
-        <FilterSidebar
-          query={query}
-          selectedTag={selectedTag}
-          tags={tags}
-          placeholder={placeholder}
-          onQueryChange={setQuery}
-          onTagClick={handleTagClick}
-        />
-      </div>
     </div>
   )
 }
