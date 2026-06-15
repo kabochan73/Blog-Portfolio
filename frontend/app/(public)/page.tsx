@@ -10,14 +10,23 @@ export default async function Home({
 }) {
   const { q, tag } = await searchParams
 
-  const [{ data: articles }, { data: tags }] = await Promise.all([
-    api.get<ApiResponse<Article[]>>('/articles', { next: { tags: ['articles'] } }),
-    api.get<ApiResponse<Tag[]>>('/tags', { next: { tags: ['tags'] } }),
-  ])
+  let articles: Article[] = []
+  let tags: Tag[] = []
+
+  try {
+    const [articlesRes, tagsRes] = await Promise.all([
+      api.get<ApiResponse<Article[]>>('/articles', { next: { tags: ['articles'] } }),
+      api.get<ApiResponse<Tag[]>>('/tags', { next: { tags: ['tags'] } }),
+    ])
+    articles = articlesRes.data
+    tags = tagsRes.data
+  } catch (err) {
+    console.error('Failed to fetch data:', err)
+  }
 
   const selectedTag = tag ? Number(tag) : null
 
-  const filtered = articles.filter((article) => {
+  const filtered = articles?.filter((article) => {
     const matchesQuery = !q || article.title.toLowerCase().includes(q.toLowerCase())
     const matchesTag = !selectedTag || article.tags.some((t) => t.id === selectedTag)
     return matchesQuery && matchesTag
