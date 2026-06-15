@@ -3,6 +3,6 @@ dockerfilePath = "Dockerfile"
 dockerBuildTarget = "runner"
 
 [deploy]
-healthcheckPath = "/"
+healthcheckPath = "/api/health"
 healthcheckTimeout = 60
 restartPolicyType = "on_failure"
