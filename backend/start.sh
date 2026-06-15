@@ -15,6 +15,7 @@ for i in $(seq 1 30); do
     echo "Retrying in 3s... ($i/30)"
     sleep 3
 done
+php artisan db:seed --force
 php artisan config:cache
 php artisan route:cache
 
