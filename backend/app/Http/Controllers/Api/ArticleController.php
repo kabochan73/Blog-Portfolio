@@ -13,7 +13,7 @@ class ArticleController extends Controller
     public function index(): AnonymousResourceCollection
     {
         $articles = Article::with('tags')
-            ->where('status', ArticleStatus::Published)
+            ->where('status', ArticleStatus::Published->value)
             ->orderByDesc('published_at')
             ->get();
 
@@ -23,7 +23,7 @@ class ArticleController extends Controller
     public function show(string $slug): ArticleResource
     {
         $article = Article::with('tags')
-            ->where('status', ArticleStatus::Published)
+            ->where('status', ArticleStatus::Published->value)
             ->where('slug', $slug)
             ->firstOrFail();
 
