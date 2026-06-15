@@ -30,7 +30,7 @@ class ArticleSeeder extends Seeder
             [
                 'title'        => 'Getting Started with Laravel 11',
                 'slug'         => 'getting-started-with-laravel-11',
-                'status'       => ArticleStatus::Published,
+                'status'       => ArticleStatus::Published->value,
                 'published_at' => now()->subDays(10),
                 'content'      => <<<'MD'
 Laravel 11 introduces a streamlined application skeleton that removes a significant amount of boilerplate, making new projects leaner and easier to navigate. The default directory structure has been trimmed down — middleware, service providers, and exception handlers are now configured in a single `bootstrap/app.php` file rather than scattered across multiple classes.
@@ -44,7 +44,7 @@ MD,
             [
                 'title'        => 'Designing RESTful APIs with Laravel Sanctum',
                 'slug'         => 'designing-restful-apis-with-laravel-sanctum',
-                'status'       => ArticleStatus::Published,
+                'status'       => ArticleStatus::Published->value,
                 'published_at' => now()->subDays(7),
                 'content'      => <<<'MD'
 Building a secure, token-based API in Laravel is straightforward with Sanctum. Unlike Passport, which implements the full OAuth2 specification, Sanctum focuses on the two most common use cases: SPA authentication via session cookies and mobile/third-party authentication via plain API tokens. This keeps the setup minimal while still covering the vast majority of real-world requirements.
@@ -58,7 +58,7 @@ MD,
             [
                 'title'        => 'PostgreSQL Performance Tips for PHP Developers',
                 'slug'         => 'postgresql-performance-tips-for-php-developers',
-                'status'       => ArticleStatus::Published,
+                'status'       => ArticleStatus::Published->value,
                 'published_at' => now()->subDays(4),
                 'content'      => <<<'MD'
 PostgreSQL is one of the most capable open-source relational databases available, but getting the best performance out of it requires understanding a few key concepts. The query planner is your best friend: use `EXPLAIN ANALYZE` to inspect execution plans and identify sequential scans that should be index scans instead.
@@ -72,7 +72,7 @@ MD,
             [
                 'title'        => 'Eloquent Relationships Deep Dive',
                 'slug'         => 'eloquent-relationships-deep-dive',
-                'status'       => ArticleStatus::Published,
+                'status'       => ArticleStatus::Published->value,
                 'published_at' => now()->subDays(2),
                 'content'      => <<<'MD'
 Eloquent's relationship system is one of Laravel's most powerful features, abstracting away the SQL joins and pivot tables that would otherwise clutter your code. Understanding the difference between `hasOne`, `hasMany`, `belongsTo`, `belongsToMany`, and the polymorphic variants is essential for modelling real-world domains cleanly.
@@ -86,7 +86,7 @@ MD,
             [
                 'title'        => 'Building a Blog API: From Migrations to Deployment',
                 'slug'         => 'building-a-blog-api-from-migrations-to-deployment',
-                'status'       => ArticleStatus::Published,
+                'status'       => ArticleStatus::Published->value,
                 'published_at' => now()->subDay(),
                 'content'      => <<<'MD'
 A blog API is the perfect project for learning the full Laravel development lifecycle. Start with migrations to define your schema — articles, tags, and a pivot table for the many-to-many relationship — then build Eloquent models with the appropriate relationships and fillable attributes. Resource controllers and API routes keep the structure conventional and easy for other developers to navigate.
