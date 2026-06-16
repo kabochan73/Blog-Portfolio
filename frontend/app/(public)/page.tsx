@@ -10,10 +10,18 @@ export default async function Home({
 }) {
   const { q, tag } = await searchParams
 
-  const [{ data: articles }, { data: tags }] = await Promise.all([
-    api.get<ApiResponse<Article[]>>('/articles', { next: { tags: ['articles'] } }),
-    api.get<ApiResponse<Tag[]>>('/tags', { next: { tags: ['tags'] } }),
-  ])
+  let articles: Article[] = []
+  let tags: Tag[] = []
+  try {
+    const [articlesRes, tagsRes] = await Promise.all([
+      api.get<ApiResponse<Article[]>>('/articles', { next: { tags: ['articles'] } }),
+      api.get<ApiResponse<Tag[]>>('/tags', { next: { tags: ['tags'] } }),
+    ])
+    articles = articlesRes.data
+    tags = tagsRes.data
+  } catch (error) {
+    console.error('Failed to fetch articles or tags:', error)
+  }
 
   const selectedTag = tag ? Number(tag) : null
 
