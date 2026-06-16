@@ -2,6 +2,14 @@
 
 簡単なBlogアプリです。志望動機や、ポートフォリオの選定理由、自分の理解度を示すのが目的です。
 
+## 本番環境
+
+| サービス   | URL                                                              |
+| ---------- | ----------------------------------------------------------------- |
+| 公開サイト | https://frontend-production-167e.up.railway.app                  |
+| 管理画面   | https://frontend-production-167e.up.railway.app/login             |
+| API        | https://backend-production-ae24.up.railway.app/api                |
+
 ## 技術スタック
 
 | レイヤー | 技術・ライブラリ                                              |
@@ -12,7 +20,7 @@
 | Backend  | Laravel 13 / PHP 8.4                                          |
 | 認証     | Laravel Sanctum 4（Bearer トークン）                          |
 | DB       | PostgreSQL 16                                                 |
-| インフラ | Docker (nginx + php-fpm + supervisor)                         |
+| インフラ | Docker (nginx + php-fpm + supervisor) / Railway（本番ホスティング） |
 | テスト   | PHPUnit 12（backend） / Jest 30 + Testing Library（frontend） |
 
 ## Docker構成
