@@ -7,7 +7,12 @@ async function login(formData: FormData) {
 
   const email = formData.get('email') as string
   const password = formData.get('password') as string
-  console.error('Login attempt:', JSON.stringify(email), 'password length:', password?.length)
+  console.error(
+    'Login attempt:', JSON.stringify(email),
+    'password length:', password?.length,
+    'trimmed length:', password?.trim().length,
+    'first/last char:', JSON.stringify(password?.[0]), JSON.stringify(password?.[password.length - 1])
+  )
 
   try {
     const res = await api.post<{ token: string }>('/login', { email, password })
