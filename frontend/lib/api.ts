@@ -28,8 +28,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   })
 
   if (!res.ok) {
-    const text = await res.text().catch(() => '')
-    throw new Error(`API error: ${res.status} ${text}`)
+    throw new Error(`API error: ${res.status}`)
   }
 
   if (res.status === 204) {
