@@ -16,7 +16,8 @@ async function login(formData: FormData) {
       path: '/',
       maxAge: 60 * 60 * 24 * 7,
     })
-  } catch {
+  } catch (err) {
+    console.error('Login failed:', err)
     redirect('/login?error=1')
   }
 
