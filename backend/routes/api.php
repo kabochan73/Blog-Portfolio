@@ -7,6 +7,9 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TagController;
 use Illuminate\Support\Facades\Route;
 
+// Health check
+Route::get('/health', fn () => response()->json(['status' => 'ok']));
+
 // Public
 Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/articles/{slug}', [ArticleController::class, 'show']);
