@@ -17,10 +17,11 @@ export function SearchSidebar({ tags }: Props) {
   const selectedTag = searchParams.get('tag') ? Number(searchParams.get('tag')) : null
 
   const [query, setQuery] = useState(urlQuery)
-
-  useEffect(() => {
+  const [syncedUrlQuery, setSyncedUrlQuery] = useState(urlQuery)
+  if (urlQuery !== syncedUrlQuery) {
+    setSyncedUrlQuery(urlQuery)
     setQuery(urlQuery)
-  }, [urlQuery])
+  }
 
   function updateParams(updates: Record<string, string | null>) {
     const params = new URLSearchParams(searchParams.toString())
