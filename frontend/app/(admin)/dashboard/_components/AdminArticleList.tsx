@@ -46,7 +46,7 @@ export function AdminArticleList({
           onTagClick={handleTagClick}
         />
       </div>
-      <main className="min-w-0 md:flex-[3] md:order-first">
+      <main className="min-w-0 md:flex-3 md:order-first">
         {filtered.length === 0 ? (
           <p className="text-gray-500">
             {query || selectedTag ? '条件に一致する記事がありません。' : emptyText}

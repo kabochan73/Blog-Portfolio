@@ -1,15 +1,8 @@
 import { api } from '@/lib/api'
 import type { ApiResponse, Article, Tag } from '@/types'
-import { ArticleList } from './_components/ArticleList'
-import { SearchSidebar } from './_components/SearchSidebar'
+import { PublicArticleList } from './_components/PublicArticleList'
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string; tag?: string }>
-}) {
-  const { q, tag } = await searchParams
-
+export default async function Home() {
   let articles: Article[] = []
   let tags: Tag[] = []
   try {
@@ -23,20 +16,5 @@ export default async function Home({
     console.error('Failed to fetch articles or tags:', error)
   }
 
-  const selectedTag = tag ? Number(tag) : null
-
-  const filtered = articles.filter((article) => {
-    const matchesQuery = !q || article.title.toLowerCase().includes(q.toLowerCase())
-    const matchesTag = !selectedTag || article.tags.some((t) => t.id === selectedTag)
-    return matchesQuery && matchesTag
-  })
-
-  return (
-    <div className="flex flex-col gap-4 md:flex-row md:gap-8">
-      <SearchSidebar tags={tags} />
-      <main className="min-w-0 md:flex-3 md:order-first">
-        <ArticleList articles={filtered} selectedTag={selectedTag} query={q ?? ''} />
-      </main>
-    </div>
-  )
+  return <PublicArticleList articles={articles} tags={tags} />
 }
