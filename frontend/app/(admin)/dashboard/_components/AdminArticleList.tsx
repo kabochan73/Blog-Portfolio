@@ -60,9 +60,16 @@ export function AdminArticleList({
                 href={`/dashboard/articles/${article.id}/edit`}
                 dateField={dateField}
                 renderTag={(tag) => (
-                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                  <button
+                    onClick={() => handleTagClick(tag.id)}
+                    className={`text-xs px-2 py-1 rounded transition-colors ${
+                      selectedTag === tag.id
+                        ? 'bg-gray-700 text-white'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                  >
                     {tag.name}
-                  </span>
+                  </button>
                 )}
                 actions={
                   <form action={deleteArticle.bind(null, article.id)}>
