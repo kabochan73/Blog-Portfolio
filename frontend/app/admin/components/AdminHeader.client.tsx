@@ -25,8 +25,8 @@ export function AdminHeader() {
           <button
             type="button"
             onClick={async () => {
+              router.push("/");
               await logout();
-              router.push("/login");
             }}
             className="text-zinc-500 hover:text-zinc-900"
           >

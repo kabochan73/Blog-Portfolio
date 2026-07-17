@@ -35,8 +35,8 @@ export function AdminPostBrowser({
   const handleDelete = async (id: number) => {
     if (!confirm("この記事を削除しますか？")) return;
     await deletePost(id);
-    await revalidatePublicCache();
     setPosts((prev) => prev?.filter((post) => post.id !== id) ?? null);
+    revalidatePublicCache();
   };
 
   if (loadError) {

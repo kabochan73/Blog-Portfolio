@@ -11,8 +11,8 @@ export default function NewPostPage() {
 
   const handleSubmit = async (input: PostInput) => {
     await createPost(input);
-    await revalidatePublicCache();
     router.push("/admin");
+    revalidatePublicCache();
   };
 
   return (

@@ -24,8 +24,8 @@ export default function EditPostPage() {
 
   const handleSubmit = async (input: PostInput) => {
     await updatePost(Number(id), input);
-    await revalidatePublicCache();
     router.push("/admin");
+    revalidatePublicCache();
   };
 
   if (loadError) {
