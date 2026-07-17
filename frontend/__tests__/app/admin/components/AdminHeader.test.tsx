@@ -29,7 +29,7 @@ test("ナビゲーションリンクを表示する", () => {
   );
 });
 
-test("ログアウトボタンでpublicページへ遷移し、logout()が呼ばれる", async () => {
+test("ログアウトボタンでlogout()が呼ばれ、publicページへ遷移する", async () => {
   const user = userEvent.setup();
   const { logout } = jest.requireMock("@/lib/api.client");
 
@@ -37,6 +37,6 @@ test("ログアウトボタンでpublicページへ遷移し、logout()が呼ば
 
   await user.click(screen.getByRole("button", { name: "ログアウト" }));
 
-  expect(push).toHaveBeenCalledWith("/");
   expect(logout).toHaveBeenCalled();
+  expect(push).toHaveBeenCalledWith("/");
 });
