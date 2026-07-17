@@ -137,7 +137,7 @@ export function PostForm({
             className="mt-1 w-full border border-zinc-300 px-2 py-1 font-mono text-sm"
           />
         ) : (
-          <div className="mt-1 min-h-200px border border-zinc-300 px-2 py-1">
+          <div className="prose mt-1 min-h-200px max-w-none border border-zinc-300 px-2 py-1">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {bodyValue}
             </ReactMarkdown>

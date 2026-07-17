@@ -37,7 +37,7 @@ export default async function PostPage({
             </ul>
           )}
         </div>
-        <div className="mt-4">
+        <div className="prose prose-xl mt-4 max-w-none">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.body}</ReactMarkdown>
         </div>
       </article>
