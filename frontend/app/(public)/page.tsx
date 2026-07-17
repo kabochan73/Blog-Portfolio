@@ -1,6 +1,6 @@
-import { getPosts, getTags } from "@/lib/api";
+import { getPosts, getTags } from "@/lib/api.server";
 import { PostBrowser } from "@/app/(public)/components/PostBrowser.client";
-import { PostList } from "@/app/(public)/components/PostList";
+import { PostList } from "@/app/(public)/components/PostList.server";
 
 export default async function Home() {
   const [posts, tags] = await Promise.all([getPosts(), getTags()]);

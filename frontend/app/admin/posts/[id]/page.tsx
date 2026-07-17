@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { PostForm } from "@/app/admin/components/PostForm.client";
-import { getAdminPost, updatePost } from "@/lib/api.client.posts";
+import { getAdminPost, updatePost } from "@/lib/api.posts.client";
 import { revalidatePublicCache } from "@/lib/api.client";
-import type { PostInput } from "@/lib/api.client.posts";
+import type { PostInput } from "@/lib/api.posts.client";
 import type { Post } from "@/types";
 
 export default function EditPostPage() {

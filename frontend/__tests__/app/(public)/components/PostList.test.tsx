@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { PostList } from "@/app/(public)/components/PostList";
+import { PostList } from "@/app/(public)/components/PostList.server";
 import type { Post } from "@/types";
 
 function makePost(overrides: Partial<Post> = {}): Post {

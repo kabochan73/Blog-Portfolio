@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { PostForm } from "@/app/admin/components/PostForm.client";
-import { createPost } from "@/lib/api.client.posts";
+import { createPost } from "@/lib/api.posts.client";
 import { revalidatePublicCache } from "@/lib/api.client";
-import type { PostInput } from "@/lib/api.client.posts";
+import type { PostInput } from "@/lib/api.posts.client";
 
 export default function NewPostPage() {
   const router = useRouter();

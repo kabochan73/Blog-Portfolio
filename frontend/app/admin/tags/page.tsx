@@ -6,7 +6,7 @@ import {
   createTag,
   updateTag,
   deleteTag,
-} from "@/lib/api.client.tags";
+} from "@/lib/api.tags.client";
 import { revalidatePublicCache, ApiError } from "@/lib/api.client";
 import type { Tag } from "@/types";
 

@@ -1,0 +1,14 @@
+{
+  "material-icon-theme.files.associations": {
+    "*.client.tsx": "react",
+    "*.client.ts": "react"
+  },
+  "material-icon-theme.files.customClones": [
+    {
+      "name": "react-server",
+      "base": "react",
+      "color": "#8bc34a",
+      "fileExtensions": ["server.ts", "server.tsx"]
+    }
+  ]
+}

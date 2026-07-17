@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { getAdminPost } from "@/lib/api.client.posts";
+import { getAdminPost } from "@/lib/api.posts.client";
 import type { Post } from "@/types";
 
 export default function DraftPreviewPage() {

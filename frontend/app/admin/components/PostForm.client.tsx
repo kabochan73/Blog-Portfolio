@@ -6,8 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { listAdminTags } from "@/lib/api.client.tags";
-import type { PostInput } from "@/lib/api.client.posts";
+import { listAdminTags } from "@/lib/api.tags.client";
+import type { PostInput } from "@/lib/api.posts.client";
 import type { Post, Tag } from "@/types";
 
 const schema = z.object({

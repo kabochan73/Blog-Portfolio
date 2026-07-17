@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import {
   listAdminPosts,
   deletePost,
-} from "@/lib/api.client.posts";
-import { listAdminTags } from "@/lib/api.client.tags";
+} from "@/lib/api.posts.client";
+import { listAdminTags } from "@/lib/api.tags.client";
 import { revalidatePublicCache } from "@/lib/api.client";
 import { Sidebar } from "@/components/Sidebar.client";
 import { AdminPostList } from "@/app/admin/components/AdminPostList.client";
