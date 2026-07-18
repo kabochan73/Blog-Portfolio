@@ -56,8 +56,8 @@ export function AdminPostBrowser({
         );
 
   return (
-    <div className="flex gap-4">
-      <div className="flex-3">
+    <div className="flex flex-col gap-4 sm:flex-row">
+      <div className="order-2 sm:order-1 sm:flex-3">
         <AdminPostList
           posts={filteredPosts}
           onDelete={handleDelete}

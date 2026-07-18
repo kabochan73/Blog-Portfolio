@@ -14,8 +14,10 @@ export function PostBrowser({
   const [selectedKey, setSelectedKey] = useState("all");
 
   return (
-    <div className="flex gap-4">
-      <div className="flex-3">{postListsByKey[selectedKey]}</div>
+    <div className="flex flex-col gap-4 sm:flex-row">
+      <div className="order-2 sm:order-1 sm:flex-3">
+        {postListsByKey[selectedKey]}
+      </div>
       <Sidebar tags={tags} selectedKey={selectedKey} onSelect={setSelectedKey} />
     </div>
   );

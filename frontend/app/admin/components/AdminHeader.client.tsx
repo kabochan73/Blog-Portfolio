@@ -9,11 +9,11 @@ export function AdminHeader() {
 
   return (
     <header className="border-b border-zinc-200 font-bold">
-      <div className="mx-auto flex max-w-4xl items-center px-4 py-4">
+      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-4 px-4 py-4">
         <Link href="/admin" className="text-2xl font-bold hover:text-zinc-500">
           Blog
         </Link>
-        <div className="ml-auto flex items-center gap-4 text-sm">
+        <div className="flex flex-wrap items-center gap-4 text-sm">
           <Link href="/admin/drafts">下書き</Link>
           <Link href="/admin/tags">タグ</Link>
           <Link

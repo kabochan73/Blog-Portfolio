@@ -12,7 +12,7 @@ export function Sidebar({
   onSelect: (key: string) => void;
 }) {
   return (
-    <aside className="flex-1">
+    <aside className="order-1 sm:order-2 sm:flex-1">
       <ul className="flex flex-col">
         <li className="border-b border-zinc-400">
           <button
