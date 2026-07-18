@@ -40,7 +40,7 @@ export default function DraftPreviewPage() {
             {post.tags.map((tag) => (
               <li
                 key={tag.id}
-                className="rounded bg-black px-2 py-0.5 text-sm text-white font-bold"
+                className="bg-black px-2 py-0.5 text-sm text-white font-bold"
               >
                 {tag.name}
               </li>

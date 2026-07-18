@@ -17,7 +17,7 @@ export function PostList({
       {posts.map((post) => (
         <li
           key={post.id}
-          className="rounded-lg border border-zinc-200 shadow-sm hover:shadow-md transition-shadow"
+          className="border border-zinc-200 shadow-sm hover:shadow-md transition-shadow"
         >
           <Link href={getHref(post)} className="block p-6">
             <h2 className="text-2xl font-bold">{post.title}</h2>
@@ -33,7 +33,7 @@ export function PostList({
                   {post.tags.map((tag) => (
                     <li
                       key={tag.id}
-                      className="rounded bg-black px-2 py-0.5 text-xs font-bold text-white"
+                      className="bg-black px-2 py-0.5 text-xs font-bold text-white"
                     >
                       {tag.name}
                     </li>

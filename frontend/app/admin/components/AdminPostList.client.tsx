@@ -21,7 +21,7 @@ export function AdminPostList({
       {posts.map((post) => (
         <li
           key={post.id}
-          className="rounded-lg border border-zinc-200 p-6 shadow-sm hover:shadow-md transition-shadow"
+          className="border border-zinc-200 p-6 shadow-sm hover:shadow-md transition-shadow"
         >
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">
@@ -55,7 +55,7 @@ export function AdminPostList({
                 {post.tags.map((tag) => (
                   <li
                     key={tag.id}
-                    className="rounded bg-black px-2 py-0.5 text-xs text-white"
+                    className="bg-black px-2 py-0.5 text-xs text-white"
                   >
                     {tag.name}
                   </li>
