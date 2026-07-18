@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
@@ -14,6 +15,7 @@ Route::get('posts/{slug}', [PostController::class, 'show']);
 Route::get('tags', [TagController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('user', fn (Request $request) => $request->user());
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::prefix('admin')->group(function () {

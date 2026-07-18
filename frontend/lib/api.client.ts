@@ -59,9 +59,13 @@ export async function logout(): Promise<void> {
 }
 
 export async function revalidatePublicCache(): Promise<void> {
+  const token = getToken();
   await fetch("/api/revalidate", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({ tags: ["posts", "tags"] }),
   });
 }
