@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -16,7 +16,13 @@ type FormValues = z.infer<typeof schema>;
 
 export default function LoginPage() {
   const router = useRouter();
-  const [loginError, setLoginError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const [loginError, setLoginError] = useState<string | null>(() =>
+    searchParams.get("expired")
+      ? "セッションの有効期限が切れました。再度ログインしてください。"
+      : null
+  );
+
   const {
     register,
     handleSubmit,

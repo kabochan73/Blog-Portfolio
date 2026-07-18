@@ -2,6 +2,8 @@ import { useSyncExternalStore } from "react";
 
 const TOKEN_KEY = "auth_token";
 
+let sessionExpired = false;
+
 type Listener = () => void;
 const listeners = new Set<Listener>();
 
@@ -30,6 +32,17 @@ export function setToken(token: string): void {
 export function clearToken(): void {
   sessionStorage.removeItem(TOKEN_KEY);
   emitChange();
+}
+
+export function markSessionExpired(): void {
+  sessionExpired = true;
+}
+
+/** admin/layoutのリダイレクト時に一度だけ読み取り、読んだら消費する */
+export function consumeSessionExpired(): boolean {
+  const expired = sessionExpired;
+  sessionExpired = false;
+  return expired;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { getToken, clearToken } from "@/lib/auth.client";
+import { getToken, clearToken, markSessionExpired } from "@/lib/auth.client";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -25,6 +25,7 @@ export async function authFetch(path: string, options: RequestInit = {}): Promis
   });
 
   if (res.status === 401) {
+    markSessionExpired();
     clearToken();
   }
 

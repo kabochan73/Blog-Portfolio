@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { AdminHeader } from "@/app/admin/components/AdminHeader.client";
-import { useAuthToken } from "@/lib/auth.client";
+import { consumeSessionExpired, useAuthToken } from "@/lib/auth.client";
 
 export default function AdminLayout({
   children,
@@ -15,7 +15,7 @@ export default function AdminLayout({
 
   useEffect(() => {
     if (token === null) {
-      router.replace("/login");
+      router.replace(consumeSessionExpired() ? "/login?expired=1" : "/login");
     }
   }, [token, router]);
 
