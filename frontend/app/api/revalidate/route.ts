@@ -13,9 +13,18 @@ export async function POST(request: Request) {
     return Response.json({ revalidated: false }, { status: 401 });
   }
 
-  const { tags } = await request.json();
+  let tags;
+  try {
+    ({ tags } = await request.json());
+  } catch {
+    return Response.json({ revalidated: false }, { status: 400 });
+  }
 
-  for (const tag of tags as string[]) {
+  if (!Array.isArray(tags) || !tags.every((tag) => typeof tag === "string")) {
+    return Response.json({ revalidated: false }, { status: 400 });
+  }
+
+  for (const tag of tags) {
     revalidateTag(tag, { expire: 0 });
   }
 
