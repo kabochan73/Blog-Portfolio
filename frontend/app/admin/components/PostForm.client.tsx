@@ -7,6 +7,7 @@ import { z } from "zod";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { listAdminTags } from "@/lib/api.tags.client";
+import { ApiError } from "@/lib/api.client";
 import type { PostInput } from "@/lib/api.posts.client";
 import type { Post, Tag } from "@/types";
 
@@ -48,6 +49,7 @@ export function PostForm({
     handleSubmit,
     control,
     setValue,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -79,6 +81,19 @@ export function PostForm({
         tag_ids: values.tag_ids,
       });
     } catch (e) {
+      if (e instanceof ApiError && e.errors) {
+        let hasFieldError = false;
+        for (const [field, messages] of Object.entries(e.errors)) {
+          if (field in schema.shape && messages[0]) {
+            setError(field as keyof FormValues, { message: messages[0] });
+            hasFieldError = true;
+          }
+        }
+        if (!hasFieldError) {
+          setSubmitError(e.message);
+        }
+        return;
+      }
       setSubmitError(e instanceof Error ? e.message : "保存に失敗しました");
     }
   };
