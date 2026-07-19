@@ -18,6 +18,7 @@ export default function AdminTagsPage() {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editingName, setEditingName] = useState("");
   const [editError, setEditError] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   useEffect(() => {
     listAdminTags()
@@ -70,9 +71,16 @@ export default function AdminTagsPage() {
 
   const handleDelete = async (id: number) => {
     if (!confirm("このタグを削除しますか？")) return;
-    await deleteTag(id);
-    setTags((prev) => prev?.filter((t) => t.id !== id) ?? null);
-    await revalidatePublicCache();
+    setDeleteError(null);
+    try {
+      await deleteTag(id);
+      setTags((prev) => prev?.filter((t) => t.id !== id) ?? null);
+      await revalidatePublicCache();
+    } catch (err) {
+      setDeleteError(
+        err instanceof Error ? err.message : "削除に失敗しました"
+      );
+    }
   };
 
   if (loadError) {
@@ -97,6 +105,7 @@ export default function AdminTagsPage() {
         </button>
       </form>
       {createError && <p className="text-sm text-red-600">{createError}</p>}
+      {deleteError && <p className="text-sm text-red-600">{deleteError}</p>}
 
       {tags.length === 0 ? (
         <p className="text-zinc-500">タグがありません。</p>
