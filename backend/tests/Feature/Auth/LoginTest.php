@@ -9,14 +9,16 @@ test('正しい認証情報でログインできる', function () {
         'password' => Hash::make('password'),
     ]);
 
-    $response = $this->postJson('/api/login', [
+    $response = $this->withHeaders(fromFrontend())->postJson('/api/login', [
         'email' => 'admin@example.com',
         'password' => 'password',
     ]);
 
     $response->assertOk()
-        ->assertJsonStructure(['token', 'user' => ['id', 'name', 'email']])
+        ->assertJsonStructure(['user' => ['id', 'name', 'email']])
         ->assertJsonPath('user.id', $user->id);
+
+    $this->assertAuthenticatedAs($user);
 });
 
 test('パスワードが間違っているとログインに失敗する', function () {
@@ -25,27 +27,31 @@ test('パスワードが間違っているとログインに失敗する', funct
         'password' => Hash::make('password'),
     ]);
 
-    $response = $this->postJson('/api/login', [
+    $response = $this->withHeaders(fromFrontend())->postJson('/api/login', [
         'email' => 'admin@example.com',
         'password' => 'wrong-password',
     ]);
 
     $response->assertUnprocessable()
         ->assertJsonValidationErrors('email');
+
+    $this->assertGuest();
 });
 
 test('存在しないメールアドレスではログインに失敗する', function () {
-    $response = $this->postJson('/api/login', [
+    $response = $this->withHeaders(fromFrontend())->postJson('/api/login', [
         'email' => 'nobody@example.com',
         'password' => 'password',
     ]);
 
     $response->assertUnprocessable()
         ->assertJsonValidationErrors('email');
+
+    $this->assertGuest();
 });
 
 test('メールアドレスとパスワードは必須である', function () {
-    $response = $this->postJson('/api/login', []);
+    $response = $this->withHeaders(fromFrontend())->postJson('/api/login', []);
 
     $response->assertUnprocessable()
         ->assertJsonValidationErrors(['email', 'password']);

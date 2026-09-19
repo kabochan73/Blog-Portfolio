@@ -17,6 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
         // API専用アプリのため、未認証時にLaravelのデフォルトの'login'名前付きルートへ
         // リダイレクトさせず常に401 JSONを返す
         $middleware->redirectGuestsTo(fn () => null);
+
+        // フロントエンド(SPA)からのCookieベース認証(Sanctum)を有効化。
+        // config/sanctum.php の stateful ドメインからのリクエストのみ、
+        // Bearerトークンではなくセッションcookieで認証される。
+        $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

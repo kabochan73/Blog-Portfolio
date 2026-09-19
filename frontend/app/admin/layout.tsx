@@ -3,23 +3,29 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { AdminHeader } from "@/app/admin/components/AdminHeader.client";
-import { consumeSessionExpired, useAuthToken } from "@/lib/auth.client";
+import { checkAuth, consumeSessionExpired, useAuthState } from "@/lib/auth.client";
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const token = useAuthToken();
+  const auth = useAuthState();
   const router = useRouter();
 
   useEffect(() => {
-    if (token === null) {
+    if (auth.status === "unknown") {
+      checkAuth();
+    }
+  }, [auth.status]);
+
+  useEffect(() => {
+    if (auth.status === "guest") {
       router.replace(consumeSessionExpired() ? "/login?expired=1" : "/login");
     }
-  }, [token, router]);
+  }, [auth.status, router]);
 
-  if (!token) {
+  if (auth.status !== "authenticated") {
     return null;
   }
 

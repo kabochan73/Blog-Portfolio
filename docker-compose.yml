@@ -28,6 +28,9 @@ services:
       DB_DATABASE: blog
       DB_USERNAME: blog
       DB_PASSWORD: secret
+      FRONTEND_URL: http://localhost:3000
+      SANCTUM_STATEFUL_DOMAINS: localhost:3000
+      SESSION_COOKIE: blog_session
     depends_on:
       db:
         condition: service_healthy
@@ -42,6 +45,8 @@ services:
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:8000/api
       API_URL: http://backend:8000/api
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      NEXT_PUBLIC_SESSION_COOKIE_NAME: blog_session
     depends_on:
       - backend
 

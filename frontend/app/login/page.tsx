@@ -5,7 +5,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { setToken } from "@/lib/auth.client";
+import { ApiError, authFetchJson } from "@/lib/api.client";
+import { setAuthenticatedUser, type AuthUser } from "@/lib/auth.client";
 
 const schema = z.object({
   email: z.email("メールアドレスの形式が正しくありません"),
@@ -40,25 +41,25 @@ function LoginForm() {
   const onSubmit = async (data: FormValues) => {
     setLoginError(null);
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    if (!res.ok) {
-      setLoginError("メールアドレスまたはパスワードが正しくありません");
-      return;
+    try {
+      const { user } = await authFetchJson<{ user: AuthUser }>("/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      setAuthenticatedUser(user);
+      router.push("/admin");
+    } catch (e) {
+      setLoginError(
+        e instanceof ApiError
+          ? "メールアドレスまたはパスワードが正しくありません"
+          : "ログインに失敗しました"
+      );
     }
-
-    const { token } = await res.json();
-    setToken(token);
-    router.push("/admin");
   };
 
   return (
     <div className="flex min-h-full w-full flex-1 items-center justify-center bg-zinc-50 px-4 py-12">
-      <div className="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-8 shadow-xl shadow-zinc-200/50">
+      <div className="w-full max-w-sm border border-zinc-200 bg-white p-8 shadow-xl shadow-zinc-200/50">
         <h1 className="text-center text-2xl font-bold tracking-tight">
           ログイン
         </h1>
@@ -77,7 +78,7 @@ function LoginForm() {
               id="email"
               type="email"
               {...register("email")}
-              className="mt-1.5 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm shadow-sm transition-colors focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              className="mt-1.5 w-full border border-zinc-300 px-3 py-2 text-sm shadow-sm transition-colors focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
             />
             {errors.email && (
               <p className="mt-1.5 text-sm text-red-600">
@@ -96,7 +97,7 @@ function LoginForm() {
               id="password"
               type="password"
               {...register("password")}
-              className="mt-1.5 w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm shadow-sm transition-colors focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              className="mt-1.5 w-full border border-zinc-300 px-3 py-2 text-sm shadow-sm transition-colors focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
             />
             {errors.password && (
               <p className="mt-1.5 text-sm text-red-600">
@@ -110,7 +111,7 @@ function LoginForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-2 rounded-lg bg-black px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800 disabled:opacity-50"
+            className="mt-2 bg-black px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-zinc-800 disabled:opacity-50"
           >
             ログイン
           </button>
