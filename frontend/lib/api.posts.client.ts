@@ -1,5 +1,5 @@
 import { authFetchJson } from "@/lib/api.client";
-import type { Post, PostStatus } from "@/types";
+import type { ApiResponse, Post, PostStatus } from "@/types";
 
 export type PostInput = {
   title: string;
@@ -10,17 +10,17 @@ export type PostInput = {
 };
 
 export async function listAdminPosts(): Promise<Post[]> {
-  const { data } = await authFetchJson<{ data: Post[] }>("/admin/posts");
+  const { data } = await authFetchJson<ApiResponse<Post[]>>("/admin/posts");
   return data;
 }
 
 export async function getAdminPost(id: number): Promise<Post> {
-  const { data } = await authFetchJson<{ data: Post }>(`/admin/posts/${id}`);
+  const { data } = await authFetchJson<ApiResponse<Post>>(`/admin/posts/${id}`);
   return data;
 }
 
 export async function createPost(input: PostInput): Promise<Post> {
-  const { data } = await authFetchJson<{ data: Post }>("/admin/posts", {
+  const { data } = await authFetchJson<ApiResponse<Post>>("/admin/posts", {
     method: "POST",
     body: JSON.stringify(input),
   });
@@ -28,7 +28,7 @@ export async function createPost(input: PostInput): Promise<Post> {
 }
 
 export async function updatePost(id: number, input: PostInput): Promise<Post> {
-  const { data } = await authFetchJson<{ data: Post }>(`/admin/posts/${id}`, {
+  const { data } = await authFetchJson<ApiResponse<Post>>(`/admin/posts/${id}`, {
     method: "PUT",
     body: JSON.stringify(input),
   });

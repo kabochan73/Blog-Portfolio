@@ -1,6 +1,6 @@
 // サーバーコンポーネント専用。誤ってクライアントバンドルに含まれるとビルドエラーになる
 import "server-only";
-import type { Post, Tag } from "@/types";
+import type { ApiResponse, Post, Tag } from "@/types";
 
 const API_URL = process.env.API_URL;
 
@@ -17,7 +17,7 @@ export async function getPosts(): Promise<Post[]> {
     }
 
     // Laravelのリソースは{data: ...}でラップされるので剥がして返す
-    const { data } = await res.json();
+    const { data }: ApiResponse<Post[]> = await res.json();
     return data;
   } catch (e) {
     // デプロイ直後などバックエンド未接続時にビルド/描画自体を落とさない
@@ -37,7 +37,7 @@ export async function getPost(slug: string): Promise<Post | null> {
       throw new Error(`Failed to fetch post ${slug}: ${res.status}`);
     }
 
-    const { data } = await res.json();
+    const { data }: ApiResponse<Post> = await res.json();
     return data;
   } catch (e) {
     // 404も含め、呼び出し側でnotFound()に使えるようnullを返す
@@ -57,7 +57,7 @@ export async function getTags(): Promise<Tag[]> {
       throw new Error(`Failed to fetch tags: ${res.status}`);
     }
 
-    const { data } = await res.json();
+    const { data }: ApiResponse<Tag[]> = await res.json();
     return data;
   } catch (e) {
     console.error(e);

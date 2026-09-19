@@ -1,3 +1,8 @@
+/** Laravel APIリソースが返す `{ data: ... }` ラッパー */
+export type ApiResponse<T> = {
+  data: T;
+};
+
 export type PostStatus = "draft" | "published";
 
 export type Tag = {

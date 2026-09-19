@@ -1,13 +1,13 @@
 import { authFetchJson } from "@/lib/api.client";
-import type { Tag } from "@/types";
+import type { ApiResponse, Tag } from "@/types";
 
 export async function listAdminTags(): Promise<Tag[]> {
-  const { data } = await authFetchJson<{ data: Tag[] }>("/admin/tags");
+  const { data } = await authFetchJson<ApiResponse<Tag[]>>("/admin/tags");
   return data;
 }
 
 export async function createTag(name: string): Promise<Tag> {
-  const { data } = await authFetchJson<{ data: Tag }>("/admin/tags", {
+  const { data } = await authFetchJson<ApiResponse<Tag>>("/admin/tags", {
     method: "POST",
     body: JSON.stringify({ name }),
   });
@@ -15,7 +15,7 @@ export async function createTag(name: string): Promise<Tag> {
 }
 
 export async function updateTag(id: number, name: string): Promise<Tag> {
-  const { data } = await authFetchJson<{ data: Tag }>(`/admin/tags/${id}`, {
+  const { data } = await authFetchJson<ApiResponse<Tag>>(`/admin/tags/${id}`, {
     method: "PUT",
     body: JSON.stringify({ name }),
   });
